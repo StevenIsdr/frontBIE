@@ -22,14 +22,14 @@ function Navbar() {
                                         href="#"
                                         className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"
                                     >
-                                        Dashboard
+                                        Nos offres
                                     </a>
 
                                     <a
                                         href="#"
                                         className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                                     >
-                                        Team
+                                        A Propos
                                     </a>
                                 </div>
                                 <div className="ml-10 flex items-baseline ">
@@ -37,7 +37,7 @@ function Navbar() {
                                         href="#"
                                         className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                                     >
-                                        Connection
+                                        Connexion
                                     </a>
                                 </div>
                             </div>
@@ -112,28 +112,14 @@ function Navbar() {
                                     href="#"
                                     className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                                 >
-                                    Mon Compte
+                                    A Propos
                                 </a>
 
                                 <a
                                     href="#"
                                     className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                                 >
-                                    Projects
-                                </a>
-
-                                <a
-                                    href="#"
-                                    className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                                >
-                                    Calendar
-                                </a>
-
-                                <a
-                                    href="#"
-                                    className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                                >
-                                    Reports
+                                    Connexion
                                 </a>
                             </div>
                         </div>
