@@ -3,8 +3,8 @@ import Navbar from "./Navbar";
 import {useState} from "react";
 
 function Login(){
-    const [username, setUsername] = useState();
-    const [password, setPassword] = useState();
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
 
 
     let handleSubmit = async (e) => {
@@ -19,9 +19,14 @@ function Login(){
                     password: password,
                 }),
             });
-            console.log(res)
+            const response = await res.json()
+            console.log(response.token)
             if (res.status === 200) {
                 console.log("User log successfully");
+                const value = JSON.stringify(response.token);
+                localStorage.setItem("token", value);
+                window.location.href = "http://localhost:3000/drive";
+
             } else {
                 console.log("Some error occured");
             }
