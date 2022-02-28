@@ -38,7 +38,7 @@ function Login(){
                     <div>
                         <h1 className="text-white font-bold text-4xl font-sans">XENODriver</h1>
                         <p className="text-white mt-1">Heberger facilement vos photos et vidéos !</p>
-                        <button type="submit" className="block w-40 bg-white text-indigo-800 mt-4 py-2 rounded-2xl font-bold mb-2">En savoir plus !</button>
+                        <a href="/register"><button className="block w-40 bg-white text-indigo-800 mt-4 py-2 rounded-2xl font-bold mb-2">Inscription</button></a>
                     </div>
                 </div>
                 <div className="flex w-1/2 justify-center items-center bg-white">
@@ -58,6 +58,7 @@ function Login(){
                             <input className="pl-2 outline-none border-none" type="password"   value={password} onChange={(e) => setPassword(e.target.value)}  placeholder="Mot de passe" />
                         </div>
                         <button onClick={handleSubmit} className="block w-full bg-indigo-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2">Connexion</button>
+                        <a href="/register" className="text-xs text-indigo-600">Pas de compte ? Inscrivez vous dès maintenant.</a>
                     </form>
                 </div>
             </div>
