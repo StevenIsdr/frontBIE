@@ -3,9 +3,15 @@ import {Link} from "react-router-dom";
 import {Transition} from "@headlessui/react";
 import {useState} from "react";
 
+
+
 const Navbar = ()=> {
     const [isOpen, setIsOpen] = useState(false);
     console.log(JSON.parse(localStorage.getItem("token")));
+    const Deco = () => {
+        localStorage.clear();
+        window.location.href = "http://localhost:3000/login";
+    }
 
     if(JSON.parse(localStorage.getItem("token")) != null){
         return (<div>
@@ -42,6 +48,13 @@ const Navbar = ()=> {
                                     >
                                         Drive
                                     </Link>
+                                </div>
+                                <div className="ml-10 flex items-baseline ">
+                                    <button onClick={() => Deco()}
+                                          className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                                    >
+                                        Deconnection
+                                    </button>
                                 </div>
                             </div>
                         </div>
