@@ -29,12 +29,14 @@ function Login(){
                 let getId = await fetch(`http://127.0.0.1:8000/api/users?username=${username}`, {
                     method: "GET",
                     headers: {
-                        'Authorization': `bearer ${token}`
+                        'Authorization': `bearer ${response.token}`
                     },
                     referrerPolicy: "origin-when-cross-origin",
                 });
-                console.log(getId)
-                // window.location.href = "http://localhost:3000/drive";
+                const responseID = await getId.json()
+                const id = JSON.stringify(responseID['hydra:member'][0]['@id']);
+                localStorage.setItem("id", id);
+                window.location.href = "http://localhost:3000/drive";
 
             } else {
                 console.log("Some error occured");
