@@ -1,9 +1,10 @@
 import './App.css';
 import Navbar from "./Navbar";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+
 
 const ModalDrive = props => {
-    if(!props.show) {
+    if (!props.show) {
         return null
     }
 
@@ -51,10 +52,27 @@ const ModalDrive = props => {
         </div>);
 }
 
-
 function Drive() {
     const [show, setShow] = useState(false)
-    
+
+    const loadFile = async () => {
+        console.log("loadFIle")
+        const token = JSON.parse(localStorage.getItem("token"))
+
+        let res = await fetch("http://127.0.0.1:8000/api/files", {
+            method: "GET",
+            headers: {
+                'Authorization': `bearer ${token}`
+            },
+            referrerPolicy: "origin-when-cross-origin"
+        });
+        console.log(res)
+    }
+
+    useEffect(() => {
+        loadFile()
+    }, []);
+
     return (
 
         <div>

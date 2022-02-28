@@ -23,9 +23,18 @@ function Login(){
             console.log(response.token)
             if (res.status === 200) {
                 console.log("User log successfully");
-                const value = JSON.stringify(response.token);
-                localStorage.setItem("token", value);
-                window.location.href = "http://localhost:3000/drive";
+                const token = JSON.stringify(response.token);
+                localStorage.setItem("token", token);
+
+                let getId = await fetch(`http://127.0.0.1:8000/api/users?username=${username}`, {
+                    method: "GET",
+                    headers: {
+                        'Authorization': `bearer ${token}`
+                    },
+                    referrerPolicy: "origin-when-cross-origin",
+                });
+                console.log(getId)
+                // window.location.href = "http://localhost:3000/drive";
 
             } else {
                 console.log("Some error occured");
