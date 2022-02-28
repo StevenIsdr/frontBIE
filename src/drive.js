@@ -74,6 +74,25 @@ function Drive() {
         loadFile()
     }, []);
 
+    async function createImg(img) {
+        const token = JSON.parse(localStorage.getItem("token"))
+        const id = JSON.parse(localStorage.getItem("id"))
+        console.log(img.target.files[0].name)
+        let res = await fetch(`http://127.0.0.1:8000/api/file/upload`, {
+            method: "POST",
+            body: {
+                'image' : img.target.files[0],
+                "user" : id,
+                "nameFile": img.target.files[0].name
+            },
+            headers: {
+                'Authorization': `bearer ${token}`
+            },
+            referrerPolicy: "origin-when-cross-origin"
+        });
+        console.log("iciii", res)
+    }
+
     return (
 
         <div>
@@ -83,14 +102,15 @@ function Drive() {
                     <h2 className="text-2xl font-semibold leading-tight">Mon drive</h2>
                 </div>
                 <div className="my-2 flex sm:flex-row flex-col pb-4">
-                    <button className="rounded-full bg-indigo-600 px-2 text-white font-bold mr-3">
+                    <input id={"fileUpload"} type={"file"} className={"hidden"} onChange={(event) => createImg(event)}/>
+                    <label htmlFor={'fileUpload'}  className="rounded-full cursor-pointer bg-indigo-600 px-2 text-white font-bold mr-3">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" viewBox="0 0 20 20"
                              fill="currentColor">
                             <path
                                 d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z"/>
                             <path d="M9 13h2v5a1 1 0 11-2 0v-5z"/>
                         </svg>
-                    </button>
+                    </label>
                     <div className="flex flex-row mb-1 sm:mb-0">
                         <div className="relative">
                             <select
