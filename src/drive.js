@@ -16,7 +16,10 @@ function Drive(){
                 <div>
                     <h2 className="text-2xl font-semibold leading-tight">Rechercher</h2>
                 </div>
+
+
                 <div className="my-2 flex sm:flex-row flex-col pb-4">
+                    <button className="rounded-full bg-indigo-600 px-3 text-white font-bold mr-3">+</button>
                     <div className="flex flex-row mb-1 sm:mb-0">
                         <div className="relative">
                             <select
