@@ -58,8 +58,8 @@ function Drive() {
     const loadFile = async () => {
         console.log("loadFIle")
         const token = JSON.parse(localStorage.getItem("token"))
-
-        let res = await fetch("http://127.0.0.1:8000/api/files", {
+        const id = JSON.parse(localStorage.getItem("id"))
+        let res = await fetch(`http://127.0.0.1:8000/api/files?user=${id}`, {
             method: "GET",
             headers: {
                 'Authorization': `bearer ${token}`
