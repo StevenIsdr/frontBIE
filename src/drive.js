@@ -2,9 +2,9 @@ import './App.css';
 import Navbar from "./Navbar";
 import {useState} from "react";
 
-function ModalDrive() {
-    const closeModal=()=> {
-
+const ModalDrive = props => {
+    if(!props.show) {
+        return null
     }
 
     return (
@@ -53,10 +53,8 @@ function ModalDrive() {
 
 
 function Drive() {
-    const openModal=()=>{
-        
-    }
-
+    const [show, setShow] = useState(false)
+    
     return (
 
         <div>
@@ -149,7 +147,7 @@ function Drive() {
                          src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
                 </div>
             </div>
-            <ModalDrive/>
+            <ModalDrive show={false}/>
         </div>);
 }
 
