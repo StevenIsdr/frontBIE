@@ -2,24 +2,63 @@ import './App.css';
 import Navbar from "./Navbar";
 import {useState} from "react";
 
-function Drive(){
-    const [nom, setNom] = useState("");
-    const [prenom, setPrenom] = useState("");
-    const [email, setEmail] = useState("");
-    const [motdepasse, setMdp] = useState("");
-    const [offre, setOffre] = useState("");
+function ModalDrive() {
+    return ( <div className="absolute top-0 left-0 overflow-hidden z-50 bg-gray-900/75 h-full w-full">
+        <div className="flex flex-wrap mt-6 h-screen items-center">
+            <div className=" w-full lg:w-2/3">
+                <img className="rounded-2xl mx-auto h-1/2 w-auto mb-2"
+                     src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
+            </div>
+            <div className="w-full lg:w-1/3">
+                <div className="lg:w-5/6 lg:pl-4 lg:mt-0 w-full mt-6" id="scroll">
+                    <div className="bg-white border p-5 rounded shadow-xl mb-8">
+                        <h2 className="text-2xl font-medium text-gray-800">A Propos</h2>
+                        <p className="text-m font-light text-gray-600 my-3">
+                            Date de création : DATEICI
+                        </p>
+                        <p className="text-m font-light text-gray-600 my-3">
+                            Nom de l'image : NOMICI
+                        </p>
+                        <a className="flex flex-wrap text-indigo-600 cursor-pointer mr-8">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" viewBox="0 0 20 20"
+                                 fill="currentColor">
+                                <path
+                                    d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z"/>
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" viewBox="0 0 20 20"
+                                 fill="currentColor">
+                                <path fill-rule="evenodd"
+                                      d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                      clip-rule="evenodd"/>
+                            </svg></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>);
+}
+
+
+
+function Drive() {
+    const modal = "<div></div>";
 
     return (
+
         <div>
             <Navbar></Navbar>
             <div className='w-11/12 mx-auto pt-8 lg:w-3/5 mb-6'>
                 <div>
                     <h2 className="text-2xl font-semibold leading-tight">Rechercher</h2>
                 </div>
-
-
                 <div className="my-2 flex sm:flex-row flex-col pb-4">
-                    <button className="rounded-full bg-indigo-600 px-3 text-white font-bold mr-3">+</button>
+                    <button className="rounded-full bg-indigo-600 px-2 text-white font-bold mr-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" viewBox="0 0 20 20"
+                             fill="currentColor">
+                            <path
+                                d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z"/>
+                            <path d="M9 13h2v5a1 1 0 11-2 0v-5z"/>
+                        </svg></button>
                     <div className="flex flex-row mb-1 sm:mb-0">
                         <div className="relative">
                             <select
@@ -67,27 +106,35 @@ function Drive(){
                     </div>
                 </div>
                 <p className="text-2xl font-bold pt-4">28 Janvier 2022</p>
-                <div className="h-1 w-full mx-auto border-b my-5 w-1/2"/>
-                <div className="flex flex-wrap">
-                    <img className="rounded-2xl h-48 w-auto mr-2 mb-2" src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
-                    <img className="rounded-2xl h-48 w-auto mr-2 mb-2" src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
-                    <img className="rounded-2xl h-48 w-auto mr-2 mb-2" src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
-                    <img className="rounded-2xl h-48 w-auto mr-2 mb-2" src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
-                    <img className="rounded-2xl h-48 w-auto mr-2 mb-2" src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
-                    <img className="rounded-2xl h-48 w-auto mr-2 mb-2" src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
-                    <img className="rounded-2xl h-48 w-auto mr-2 mb-2" src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
+                <div className="h-1 w-full mx-auto border-b my-5 w-1/2 "/>
+                <div className="flex flex-wrap justify-center">
+                    <img className="rounded-2xl h-48 w-auto mr-2 mb-2"
+                         src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
+                    <img className="rounded-2xl h-48 w-auto mr-2 mb-2"
+                         src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
+                    <img className="rounded-2xl h-48 w-auto mr-2 mb-2"
+                         src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
+                    <img className="rounded-2xl h-48 w-auto mr-2 mb-2"
+                         src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
+                    <img className="rounded-2xl h-48 w-auto mr-2 mb-2"
+                         src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
+                    <img className="rounded-2xl h-48 w-auto mr-2 mb-2"
+                         src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
+                    <img className="rounded-2xl h-48 w-auto mr-2 mb-2"
+                         src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
                 </div>
                 <p className="text-2xl font-bold pt-4">29 Janvier 2022</p>
-                <div className="h-1 w-full mx-auto border-b my-5 w-1/2"/>
-                <div className="flex flex-wrap">
-                    <img className="rounded-2xl h-48 w-auto mr-2 mb-2" src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
-                    <img className="rounded-2xl h-48 w-auto mr-2 mb-2" src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
-                    <img className="rounded-2xl h-48 w-auto mr-2 mb-2" src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
+                <div className="h-1 w-full mx-auto border-b my-5 w-1/2 "/>
+                <div className="flex flex-wrap justify-center">
+                    <img className="rounded-2xl h-48 w-auto mr-2 mb-2"
+                         src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
+                    <img className="rounded-2xl h-48 w-auto mr-2 mb-2"
+                         src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
+                    <img className="rounded-2xl h-48 w-auto mr-2 mb-2"
+                         src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
                 </div>
-
-
-
             </div>
+        {/*<ModalDrive></ModalDrive>*/}
         </div>);
 }
 
