@@ -34,7 +34,7 @@ function Login(){
         <div>
             <Navbar></Navbar>
             <div className="h-screen flex">
-                <div className="flex w-1/2 bg-gradient-to-tr from-blue-800 to-purple-700 i justify-around items-center">
+                <div className="flex w-1/2 bg-gradient-to-tr from-blue-800 to-purple-700 i justify-around items-center xs:block">
                     <div>
                         <h1 className="text-white font-bold text-4xl font-sans">XENODriver</h1>
                         <p className="text-white mt-1">Heberger facilement vos photos et vidéos !</p>
