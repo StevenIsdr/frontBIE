@@ -2,7 +2,7 @@ import './App.css';
 import Navbar from "./Navbar";
 import {useState} from "react";
 
-function Register(){
+function Drive(){
     const [nom, setNom] = useState("");
     const [prenom, setPrenom] = useState("");
     const [email, setEmail] = useState("");
@@ -88,4 +88,4 @@ function Register(){
         </div>);
 }
 
-export default Register;
+export default Drive;

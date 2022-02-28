@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import Login from './Login.js';
 import Drive from './drive.js';
+import Offres from './offres.js';
 import {
     BrowserRouter,
     Routes,
@@ -20,6 +21,7 @@ ReactDOM.render(
                 <Route path="/login" element={<Login/>} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/drive" element={<Drive />} />
+                <Route path="/offres" element={<Offres />} />
             </Routes>
         </BrowserRouter>
     </React.StrictMode>,
