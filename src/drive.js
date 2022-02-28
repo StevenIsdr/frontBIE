@@ -53,6 +53,11 @@ const ModalDrive = props => {
 }
 
 function Drive() {
+    if(localStorage.getItem("token") == null){
+        window.location.href = "http://localhost:3000/login";
+    }
+
+
     const [show, setShow] = useState(false)
     const [file, setFile] = useState("")
 
