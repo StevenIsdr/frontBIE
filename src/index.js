@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import Login from './Login.js';
+import Drive from './drive.js';
 import {
     BrowserRouter,
     Routes,
@@ -18,6 +19,7 @@ ReactDOM.render(
                 <Route path="/" element={<App/>} />
                 <Route path="/login" element={<Login/>} />
                 <Route path="/register" element={<Register />} />
+                <Route path="/drive" element={<Drive />} />
             </Routes>
         </BrowserRouter>
     </React.StrictMode>,

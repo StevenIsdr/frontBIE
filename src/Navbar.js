@@ -20,17 +20,17 @@ const Navbar = ()=> {
                         <div className="hidden md:flex md:justify-between">
                             <div className="ml-10 flex items-baseline space-x-9">
                                 <a
-                                    href="#"
+                                    href="/"
                                     className=" hover:bg-gray-700 text-white px-3 py-2 rounded-md text-sm font-medium"
                                 >
-                                    Nos offres
+                                    Accueil
                                 </a>
 
                                 <a
-                                    href="#"
+                                    href="/offres"
                                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                                 >
-                                    A Propos
+                                    Nos Offres
                                 </a>
                             </div>
                             <div className="ml-10 flex items-baseline ">
@@ -100,14 +100,14 @@ const Navbar = ()=> {
                             href="#"
                             className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
                         >
-                            Nos Offres
+                            Accueil
                         </a>
 
                         <a
                             href="#"
                             className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                         >
-                            A Propos
+                            Nos Offres
                         </a>
 
                         <Link
