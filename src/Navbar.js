@@ -43,13 +43,6 @@ const Navbar = ()=> {
                                         Drive
                                     </Link>
                                 </div>
-                                <div className="ml-10 flex items-baseline ">
-                                    <Link OnClick={localStorage.clear()}
-                                          className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                                    >
-                                        Deconnection
-                                    </Link>
-                                </div>
                             </div>
                         </div>
                         <div className="-mr-2 flex md:hidden">
