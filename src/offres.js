@@ -10,14 +10,18 @@ function Offres(){
             <div className='w-11/12 mx-auto pt-8 lg:w-3/5 mb-6'>
                 <div className="w-full mx-auto bg-white px-5 py-10 mb-10">
                     <div className="text-center max-w-xl mx-auto">
-                        <h1 className="text-5xl md:text-6xl font-bold mb-5 text-indigo-600">Nos Offres</h1>
-                        <h3 className="text-xl font-medium mb-10">Voici les différentes offres que propose XenoDriver pour vos stockage de photos</h3>
+                        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center text-gray-800 font-black leading-7 md:leading-10 pb-4">
+                            Nos
+                            <span className="text-indigo-600"> Offres </span>
+                            de stockage
+                        </h1>
+                        <h3 className="text-l font-medium mb-10">Voici les différentes offres que propose XenoDriver pour vos stockage de photos</h3>
                     </div>
                     <div className="max-w-4xl mx-auto md:flex">
                         <div
                             className="w-full md:w-1/3 md:max-w-none bg-white px-8 md:px-10 py-8 md:py-10 mb-3 mx-auto md:my-6 rounded-md shadow-lg shadow-gray-600 md:flex md:flex-col">
                             <div className="w-full flex-grow">
-                                <h2 className="text-center font-bold uppercase mb-4 text-indigo-600">Gratuit</h2>
+                                <h2 className="text-center font-bold uppercase mb-4">Gratuit</h2>
                                 <h3 className="text-center font-bold text-4xl mb-5 text-indigo-600">0€/Mois</h3>
                                 <ul className="text-sm px-5 mb-8">
                                     <li className="leading-tight"><i className="mdi mdi-check-bold text-lg"></i> 15Gb de stockage
@@ -35,7 +39,7 @@ function Offres(){
                         <div
                             className="w-full md:w-1/3 md:max-w-none bg-white px-8 md:px-10 py-8 md:py-10 mb-3 mx-auto md:-mx-3 md:mb-0 rounded-md shadow-lg shadow-gray-600 md:relative md:z-50 md:flex md:flex-col">
                             <div className="w-full flex-grow">
-                                <h2 className="text-center font-bold uppercase mb-4 text-indigo-600">Premium</h2>
+                                <h2 className="text-center font-bold uppercase mb-4">Premium</h2>
                                 <h3 className="text-center font-bold text-4xl md:text-5xl mb-5 text-indigo-600">20€/Mois</h3>
                                 <ul className="text-sm px-5 mb-8">
                                     <li className="leading-tight"><i className="mdi mdi-check-bold text-lg"></i> 200Gb de Stockage
@@ -61,7 +65,7 @@ function Offres(){
                         <div
                             className="w-full md:w-1/3 md:max-w-none bg-white px-8 md:px-10 py-8 md:py-10 mb-3 mx-auto md:my-6 rounded-md shadow-lg shadow-gray-600 md:flex md:flex-col">
                             <div className="w-full flex-grow">
-                                <h2 className="text-center font-bold uppercase mb-4 text-indigo-600">Étudiant</h2>
+                                <h2 className="text-center font-bold uppercase mb-4">Étudiant</h2>
                                 <h3 className="text-center font-bold text-4xl mb-5 text-indigo-600">$5/Mois</h3>
                                 <ul className="text-sm px-5 mb-8">
                                     <li className="leading-tight"><i className="mdi mdi-check-bold text-lg"></i> 200Gb de Stockage
