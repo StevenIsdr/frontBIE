@@ -54,9 +54,9 @@ const ModalDrive = props => {
 
 function Drive() {
     const [show, setShow] = useState(false)
+    const [file, setFile] = useState("")
 
     const loadFile = async () => {
-        console.log("loadFIle")
         const token = JSON.parse(localStorage.getItem("token"))
         const id = JSON.parse(localStorage.getItem("id"))
         let res = await fetch(`http://127.0.0.1:8000/api/files?user=${id}`, {
@@ -66,7 +66,8 @@ function Drive() {
             },
             referrerPolicy: "origin-when-cross-origin"
         });
-        console.log(res)
+        const response = await res.json()
+        setFile(response['hydra:member'])
     }
 
     useEffect(() => {

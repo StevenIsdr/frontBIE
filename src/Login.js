@@ -8,7 +8,6 @@ function Login(){
 
 
     let handleSubmit = async (e) => {
-        console.log("connexion")
         e.preventDefault();
         try {
             let res = await fetch("http://127.0.0.1:8000/api/login", {
@@ -20,7 +19,6 @@ function Login(){
                 }),
             });
             const response = await res.json()
-            console.log(response.token)
             if (res.status === 200) {
                 console.log("User log successfully");
                 const token = JSON.stringify(response.token);

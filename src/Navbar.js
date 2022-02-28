@@ -7,7 +7,6 @@ import {useState} from "react";
 
 const Navbar = ()=> {
     const [isOpen, setIsOpen] = useState(false);
-    console.log(JSON.parse(localStorage.getItem("token")));
     const Deco = () => {
         localStorage.clear();
         window.location.href = "http://localhost:3000/login";
