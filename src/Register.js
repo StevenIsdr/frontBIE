@@ -3,6 +3,10 @@ import Navbar from "./Navbar";
 import {useState} from "react";
 
 function Register(){
+    if(localStorage.getItem("token") != null){
+        window.location.href = "http://localhost:3000/drive";
+    }
+
     const [nom, setNom] = useState("");
     const [prenom, setPrenom] = useState("");
     const [username, setUsername] = useState("");
