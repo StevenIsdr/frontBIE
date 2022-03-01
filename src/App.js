@@ -30,6 +30,8 @@ function App() {
                             </div>
                         </div>
                     </div>
+                    <div className="h-1 w-full mx-auto border-b my-5 w-1/2 "/>
+
                     {/* <!-- /End replace --> */}
                 </div>
             </main>

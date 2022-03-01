@@ -123,7 +123,7 @@ function Drive() {
                 <div className="my-2 flex sm:flex-row flex-col pb-4">
                     <input id={"fileUpload"} type={"file"} className={"hidden"} onChange={(event) => createImg(event)}/>
                     <label htmlFor={'fileUpload'}  className="rounded-full cursor-pointer bg-indigo-600 px-2 text-white font-bold mr-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" viewBox="0 0 20 20"
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 p-1" viewBox="0 0 20 20"
                              fill="currentColor">
                             <path
                                 d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z"/>
@@ -177,7 +177,7 @@ function Drive() {
                     </div>
                 </div>
                 <p className="text-2xl font-bold pt-4">28 Janvier 2022</p>
-                <div className="h-1 w-full mx-auto border-b my-5 w-1/2 "/>
+                <div className="h-1 w-full border-b my-5 w-1/2"/>
                 <div className="flex flex-wrap justify-center">
                     <img className="rounded-2xl h-48 w-auto mr-2 mb-2"
                          src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
@@ -195,7 +195,7 @@ function Drive() {
                          src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
                 </div>
                 <p className="text-2xl font-bold pt-4">29 Janvier 2022</p>
-                <div className="h-1 w-full mx-auto border-b my-5 w-1/2 "/>
+                <div className="h-1 w-full border-b my-5 w-1/2 "/>
                 <div className="flex flex-wrap justify-center">
                     <img className="rounded-2xl h-48 w-auto mr-2 mb-2"
                          src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
