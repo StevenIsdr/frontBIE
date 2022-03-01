@@ -32,8 +32,8 @@ function Login(){
                     referrerPolicy: "origin-when-cross-origin",
                 });
                 const responseID = await getId.json()
-                const id = JSON.stringify(responseID['hydra:member'][0]['@id']);
-                localStorage.setItem("id", id);
+                const user = JSON.stringify(responseID['hydra:member'][0]);
+                localStorage.setItem("user", user);
                 window.location.href = "http://localhost:3000/drive";
 
             } else {

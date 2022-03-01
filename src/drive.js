@@ -63,8 +63,8 @@ function Drive() {
 
     const loadFile = async () => {
         const token = JSON.parse(localStorage.getItem("token"))
-        const id = JSON.parse(localStorage.getItem("id"))
-        let res = await fetch(`http://127.0.0.1:8000/api/files?user=${id}`, {
+        const user = JSON.parse(localStorage.getItem("user"))
+        let res = await fetch(`http://127.0.0.1:8000/api/files?user=${user.id}`, {
             method: "GET",
             headers: {
                 'Authorization': `bearer ${token}`
@@ -79,21 +79,35 @@ function Drive() {
         loadFile()
     }, []);
 
+    function getBase64(file) {
+        return new Promise(function(resolve, reject) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                resolve(reader.result);
+            };
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+        });
+    }
+
     async function createImg(img) {
         const token = JSON.parse(localStorage.getItem("token"))
-        const id = JSON.parse(localStorage.getItem("id"))
-        console.log(img.target.files[0].name)
+        const user = JSON.parse(localStorage.getItem("user"))
+        console.log(img.target.files[0])
+        const file = await getBase64(img.target.files[0])
+        console.log(file)
         let res = await fetch(`http://127.0.0.1:8000/api/file/upload`, {
             method: "POST",
-            body: {
-                'image' : img.target.files[0],
-                "user" : id,
-                "nameFile": img.target.files[0].name
-            },
+            body: JSON.stringify({
+                'image' : file,
+                'user' : user,
+                'nameFile': img.target.files[0].name
+            }),
             headers: {
+                'content-type': 'application/json',
                 'Authorization': `bearer ${token}`
             },
-            referrerPolicy: "origin-when-cross-origin"
+            // referrerPolicy: "origin-when-cross-origin"
         });
         console.log("iciii", res)
     }
