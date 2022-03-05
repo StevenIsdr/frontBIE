@@ -1,6 +1,7 @@
 import './App.css';
 import Navbar from "./Navbar";
 import {useEffect, useState} from "react";
+import {render} from "react-dom";
 
 
 const ModalDrive = props => {
@@ -10,7 +11,7 @@ const ModalDrive = props => {
 
     return (
         <div className="absolute top-0 left-0 overflow-hidden z-50 bg-gray-900/75 h-full w-full">
-            <div className="absolute text-white top-5 right-5">
+            <div className="absolute text-white top-5 right-5 cursor-pointer" onClick={() => props.setShow(false)}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd"
                           d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
@@ -20,17 +21,17 @@ const ModalDrive = props => {
             <div className="flex flex-wrap mt-6 h-screen items-center">
                 <div className=" w-full lg:w-2/3">
                     <img className="rounded-2xl mx-auto h-1/2 w-auto mb-2"
-                         src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
+                         src={props.img.path}/>
                 </div>
                 <div className="w-full lg:w-1/3">
                     <div className="lg:w-5/6 lg:pl-4 lg:mt-0 w-full mt-6" id="scroll">
                         <div className="bg-white border p-5 rounded shadow-xl mb-8">
                             <h2 className="text-2xl font-medium text-gray-800">A Propos</h2>
                             <p className="text-m font-light text-gray-600 my-3">
-                                Date de création : DATEICI
+                                Date de création : {new Date(props.img.created).toLocaleDateString("fr")}
                             </p>
                             <p className="text-m font-light text-gray-600 my-3">
-                                Nom de l'image : NOMICI
+                                Nom de l'image : {props.img.name}
                             </p>
                             <a className="flex flex-wrap text-indigo-600 cursor-pointer mr-8">
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" viewBox="0 0 20 20"
@@ -53,13 +54,15 @@ const ModalDrive = props => {
 }
 
 function Drive() {
-    if(localStorage.getItem("token") == null){
+    if (localStorage.getItem("token") == null) {
         window.location.href = "http://localhost:3000/login";
     }
 
 
     const [show, setShow] = useState(false)
+    const [dateValue, setDateValue] = useState(false)
     const [file, setFile] = useState("")
+    const [fileSelected, setFileSelected] = useState("")
 
     const loadFile = async () => {
         const token = JSON.parse(localStorage.getItem("token"))
@@ -80,9 +83,9 @@ function Drive() {
     }, []);
 
     function getBase64(file) {
-        return new Promise(function(resolve, reject) {
+        return new Promise(function (resolve, reject) {
             const reader = new FileReader();
-            reader.onload = function() {
+            reader.onload = function () {
                 resolve(reader.result);
             };
             reader.onerror = reject;
@@ -99,8 +102,8 @@ function Drive() {
         let res = await fetch(`http://127.0.0.1:8000/api/file/upload`, {
             method: "POST",
             body: JSON.stringify({
-                'image' : file,
-                'user' : user,
+                'image': file,
+                'user': user,
                 'nameFile': img.target.files[0].name
             }),
             headers: {
@@ -109,11 +112,9 @@ function Drive() {
             },
             // referrerPolicy: "origin-when-cross-origin"
         });
-        console.log("iciii", res)
     }
 
     return (
-
         <div>
             <Navbar/>
             <div className='w-11/12 mx-auto pt-8 lg:w-3/5 mb-6'>
@@ -122,7 +123,8 @@ function Drive() {
                 </div>
                 <div className="my-2 flex sm:flex-row flex-col pb-4">
                     <input id={"fileUpload"} type={"file"} className={"hidden"} onChange={(event) => createImg(event)}/>
-                    <label htmlFor={'fileUpload'}  className="rounded-full cursor-pointer bg-indigo-600 px-2 text-white font-bold mr-3">
+                    <label htmlFor={'fileUpload'}
+                           className="rounded-full cursor-pointer bg-indigo-600 px-2 text-white font-bold mr-3">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 p-1" viewBox="0 0 20 20"
                              fill="currentColor">
                             <path
@@ -176,36 +178,40 @@ function Drive() {
                                className="appearance-none rounded-r rounded-l sm:rounded-l-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none"/>
                     </div>
                 </div>
-                <p className="text-2xl font-bold pt-4">28 Janvier 2022</p>
                 <div className="h-1 w-full border-b my-5 w-1/2"/>
                 <div className="flex flex-wrap justify-center">
-                    <img className="rounded-2xl h-48 w-auto mr-2 mb-2"
-                         src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
-                    <img className="rounded-2xl h-48 w-auto mr-2 mb-2"
-                         src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
-                    <img className="rounded-2xl h-48 w-auto mr-2 mb-2"
-                         src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
-                    <img className="rounded-2xl h-48 w-auto mr-2 mb-2"
-                         src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
-                    <img className="rounded-2xl h-48 w-auto mr-2 mb-2"
-                         src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
-                    <img className="rounded-2xl h-48 w-auto mr-2 mb-2"
-                         src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
-                    <img className="rounded-2xl h-48 w-auto mr-2 mb-2"
-                         src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
-                </div>
-                <p className="text-2xl font-bold pt-4">29 Janvier 2022</p>
-                <div className="h-1 w-full border-b my-5 w-1/2 "/>
-                <div className="flex flex-wrap justify-center">
-                    <img className="rounded-2xl h-48 w-auto mr-2 mb-2"
-                         src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
-                    <img className="rounded-2xl h-48 w-auto mr-2 mb-2"
-                         src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
-                    <img className="rounded-2xl h-48 w-auto mr-2 mb-2"
-                         src="https://d1fmx1rbmqrxrr.cloudfront.net/cnet/optim/i/edit/2019/04/eso1644bsmall__w770.jpg"/>
+                    {
+                        file && file.map(function (img, i) {
+                            if (dateValue) {
+                                if (dateValue !== img.created){
+                                    return (
+                                        <>
+                                            <p key={i} className="text-2xl font-bold pt-4">{new Date(img.created).toLocaleDateString("fr")}</p>
+                                            <div className="h-1 w-full border-b my-5 w-1/2"/>
+                                        </>
+                                    )
+                                }
+                            } else {
+                                setDateValue(img.created)
+                                return (
+                                    <>
+                                        <p key={i} className="text-2xl font-bold pt-4">{new Date(img.created).toLocaleDateString("fr")}</p>
+                                        <div className="h-1 w-full border-b my-5 w-1/2"/>
+                                    </>
+                                )
+                            }
+                            return (
+                                <img key={i} onClick={() => {
+                                    setFileSelected(img)
+                                    setShow(true)
+                                }} className="rounded-2xl h-48 w-auto mr-2 mb-2 cursor-pointer"
+                                     src={img.path} alt={""}/>
+                            )
+                        })
+                    }
                 </div>
             </div>
-            <ModalDrive show={false}/>
+            <ModalDrive show={show} setShow={setShow} img={fileSelected}/>
         </div>);
 }
 
