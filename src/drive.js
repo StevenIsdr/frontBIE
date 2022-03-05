@@ -112,6 +112,7 @@ function Drive() {
             },
             // referrerPolicy: "origin-when-cross-origin"
         });
+        await loadFile()
     }
 
     return (
@@ -182,37 +183,50 @@ function Drive() {
                 <div className="flex flex-wrap justify-center">
                     {
                         file && file.map(function (img, i) {
+                            let newDate = false
+                            let video = false
                             if (dateValue) {
-                                if (dateValue !== img.created){
-                                    return (
-                                        <>
-                                            <p key={i} className="text-2xl font-bold pt-4">{new Date(img.created).toLocaleDateString("fr")}</p>
-                                            <div className="h-1 w-full border-b my-5 w-1/2"/>
-                                        </>
-                                    )
+                                if (dateValue !== img.created) {
+                                    newDate = true
                                 }
                             } else {
                                 setDateValue(img.created)
-                                return (
-                                    <>
-                                        <p key={i} className="text-2xl font-bold pt-4">{new Date(img.created).toLocaleDateString("fr")}</p>
-                                        <div className="h-1 w-full border-b my-5 w-1/2"/>
-                                    </>
-                                )
+                                newDate = true
+                            }
+                            if (img.path.startsWith("data:video")) {
+                                video = true
                             }
                             return (
-                                <img key={i} onClick={() => {
-                                    setFileSelected(img)
-                                    setShow(true)
-                                }} className="rounded-2xl h-48 w-auto mr-2 mb-2 cursor-pointer"
-                                     src={img.path} alt={""}/>
+                                <div key={i}>
+                                    {newDate &&
+                                    <>
+                                        <p className="text-2xl font-bold pt-4">{new Date(img.created).toLocaleDateString("fr")}</p>
+                                        <div className="h-1 w-full border-b my-5 w-1/2"/>
+                                    </>
+                                    }
+                                    {video &&
+                                    <>
+                                        <video controls width="500">
+                                        <source key={i} className="rounded-2xl h-48 w-auto mr-2 mb-2 cursor-pointer"
+                                             src={img.path} type={"video/mp4"}/>
+                                        </video>
+                                    </>
+                                    }
+                                    {!video && <img key={i} onClick={() => {
+                                        setFileSelected(img)
+                                        setShow(true)
+                                    }} className="rounded-2xl h-48 w-auto mr-2 mb-2 cursor-pointer"
+                                                    src={img.path} alt={""}/>
+                                    }
+                                </div>
                             )
                         })
                     }
                 </div>
             </div>
             <ModalDrive show={show} setShow={setShow} img={fileSelected}/>
-        </div>);
+        </div>
+    );
 }
 
 export default Drive;
