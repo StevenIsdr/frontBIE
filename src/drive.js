@@ -186,11 +186,11 @@ function Drive() {
                             let newDate = false
                             let video = false
                             if (dateValue) {
-                                if (dateValue !== img.created) {
+                                if (dateValue != new Date(img.created).toLocaleDateString("fr")) {
                                     newDate = true
                                 }
                             } else {
-                                setDateValue(img.created)
+                                setDateValue(new Date(img.created).toLocaleDateString("fr"))
                                 newDate = true
                             }
                             if (img.path.startsWith("data:video")) {
