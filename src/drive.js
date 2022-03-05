@@ -2,6 +2,7 @@ import './App.css';
 import Navbar from "./Navbar";
 import {useEffect, useState} from "react";
 import {render} from "react-dom";
+import moment from "moment";
 
 
 const ModalDrive = props => {
@@ -61,8 +62,15 @@ function Drive() {
 
     const [show, setShow] = useState(false)
     const [dateValue, setDateValue] = useState(false)
-    const [file, setFile] = useState("")
+    const [dateValueDiff, setDateValueDiff] = useState(moment())
+    const [file, setFile] = useState([])
     const [fileSelected, setFileSelected] = useState("")
+
+
+    useEffect(async () => {
+        await loadFile()
+        await loadFileArray()
+    }, []);
 
     const loadFile = async () => {
         const token = JSON.parse(localStorage.getItem("token"))
@@ -78,9 +86,26 @@ function Drive() {
         setFile(response['hydra:member'])
     }
 
-    useEffect(() => {
-        loadFile()
-    }, []);
+    function loadFileArray() {
+        let fileArray = []
+        file.map( (img) => {
+                console.log(fileArray)
+                if (dateValue && fileArray.length >= 1) {
+                    if (moment(img.created).isSame(dateValueDiff)) {
+                        console.log("sammeee", img.created , dateValue)
+                        fileArray[fileArray.length][1].push(img)
+                    } else { 
+                        setDateValueDiff(moment(img.created))
+                        fileArray.push([{"created": moment(img.created)}, [img]])
+                    }
+                } else {
+                    setDateValue(true)
+                    setDateValueDiff(moment(img.created))
+                    fileArray.push([{"created": moment(img.created)}, [img]])
+                }
+            }
+        )
+    }
 
     function getBase64(file) {
         return new Promise(function (resolve, reject) {
@@ -186,11 +211,11 @@ function Drive() {
                             let newDate = false
                             let video = false
                             if (dateValue) {
-                                if (dateValue != new Date(img.created).toLocaleDateString("fr")) {
+                                if (dateValue !== new Date(img.created).toLocaleDateString("fr")) {
                                     newDate = true
                                 }
                             } else {
-                                setDateValue(new Date(img.created).toLocaleDateString("fr"))
+                              //  setDateValue(new Date(img.created).toLocaleDateString("fr"))
                                 newDate = true
                             }
                             if (img.path.startsWith("data:video")) {
@@ -207,8 +232,8 @@ function Drive() {
                                     {video &&
                                     <>
                                         <video controls width="500">
-                                        <source key={i} className="rounded-2xl h-48 w-auto mr-2 mb-2 cursor-pointer"
-                                             src={img.path} type={"video/mp4"}/>
+                                            <source key={i} className="rounded-2xl h-48 w-auto mr-2 mb-2 cursor-pointer"
+                                                    src={img.path} type={"video/mp4"}/>
                                         </video>
                                     </>
                                     }
