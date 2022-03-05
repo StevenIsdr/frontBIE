@@ -10,7 +10,7 @@ const ModalDrive = props => {
     }
 
     return (
-        <div className="absolute top-0 left-0 overflow-hidden z-50 bg-gray-900/75 h-full w-full">
+        <div className="fixed top-0 left-0 overflow-hidden z-50 bg-gray-900/75 h-full w-full">
             <div className="absolute text-white top-5 right-5 cursor-pointer" onClick={() => props.setShow(false)}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12" viewBox="0 0 20 20" fill="currentColor">
                     <path fillRule="evenodd"
@@ -180,7 +180,7 @@ function Drive() {
                     </div>
                 </div>
                 <div className="h-1 w-full border-b my-5 w-1/2"/>
-                <div className="flex flex-wrap justify-center">
+                <div>
                     {
                         file && file.map(function (img, i) {
                             let newDate = false
@@ -215,7 +215,7 @@ function Drive() {
                                     {!video && <img key={i} onClick={() => {
                                         setFileSelected(img)
                                         setShow(true)
-                                    }} className="rounded-2xl h-48 w-auto mr-2 mb-2 cursor-pointer"
+                                    }} className="rounded-2xl h-48 w-auto mr-2 mb-2 cursor-pointer inline-block"
                                                     src={img.path} alt={""}/>
                                     }
                                 </div>
