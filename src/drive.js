@@ -84,39 +84,19 @@ function Drive() {
         });
         const response = await res.json()
         const fileResponse = response['hydra:member']
-        let fileArray = []
-        console.log("initialllll", fileArray)
         let arrayFile = []
         let dateCOmpare = moment(fileResponse[0].created).format('L')
-        arrayFile.push({"created" : dateCOmpare, file : [fileResponse[0]]})
-        console.log(dateCOmpare) 
+        arrayFile.push({"created": dateCOmpare, file: [fileResponse[0]]})
         for (let i = 1; i < fileResponse.length; i++) {
-            if (moment(dateCOmpare).isSame(moment(fileResponse[i].created))){
-                arrayFile[arrayFile.length -1]['file'].push(fileResponse[i])
-                console.log(fileResponse[i])
-            }else{
-                dateCOmpare =  moment(fileResponse[i].created).format('L')
-                arrayFile.push({"created" : dateCOmpare, file : [fileResponse[i]]})
+            if (moment(dateCOmpare).isSame(moment(fileResponse[i].created))) {
+                arrayFile[arrayFile.length - 1]['file'].push(fileResponse[i])
+            } else {
+                dateCOmpare = moment(fileResponse[i].created).format('L')
+                arrayFile.push({"created": dateCOmpare, file: [fileResponse[i]]})
             }
         }
         console.log("finish", arrayFile)
-
-        //     console.log(file)
-        //     if (i !== 0) {
-        //         const created = moment(img.created).format('L')
-        //         const dateValueDiffMoment = moment(dateValueDiff).format('L')
-        //         if (moment(created).isSame(dateValueDiffMoment)) {
-        //             fileArray[fileArray.length -1][1].push(img)
-        //         } else {
-        //             setDateValueDiff(img.created)
-        //             fileArray.push([{"created": moment(img.created).format('L')}, [img]])
-        //         }
-        //     } else {
-        //         setDateValueDiff(img.created)
-        //         fileArray.push([{"created": moment(img.created).format('L')}, [img]])
-        //     }
-        // console.log("yeahhhh",fileArray)
-        setFile(fileArray)
+        setFile(arrayFile)
 
     }
 
@@ -219,47 +199,32 @@ function Drive() {
                 </div>
                 <div className="h-1 w-full border-b my-5 w-1/2"/>
                 <div>
-                    {/*{*/}
-                    {/*    file && file.map(function (img, i) {*/}
-                    {/*        let newDate = false*/}
-                    {/*        let video = false*/}
-                    {/*        if (dateValue) {*/}
-                    {/*            if (dateValue !== new Date(img.created).toLocaleDateString("fr")) {*/}
-                    {/*                newDate = true*/}
-                    {/*            }*/}
-                    {/*        } else {*/}
-                    {/*          //  setDateValue(new Date(img.created).toLocaleDateString("fr"))*/}
-                    {/*            newDate = true*/}
-                    {/*        }*/}
-                    {/*        if (img.path.startsWith("data:video")) {*/}
-                    {/*            video = true*/}
-                    {/*        }*/}
-                    {/*        return (*/}
-                    {/*            <div key={i}>*/}
-                    {/*                {newDate &&*/}
-                    {/*                <>*/}
-                    {/*                    <p className="text-2xl font-bold pt-4">{new Date(img.created).toLocaleDateString("fr")}</p>*/}
-                    {/*                    <div className="h-1 w-full border-b my-5 w-1/2"/>*/}
-                    {/*                </>*/}
-                    {/*                }*/}
-                    {/*                {video &&*/}
-                    {/*                <>*/}
-                    {/*                    <video controls width="500">*/}
-                    {/*                        <source key={i} className="rounded-2xl h-48 w-auto mr-2 mb-2 cursor-pointer"*/}
-                    {/*                                src={img.path} type={"video/mp4"}/>*/}
-                    {/*                    </video>*/}
-                    {/*                </>*/}
-                    {/*                }*/}
-                    {/*                {!video && <img key={i} onClick={() => {*/}
-                    {/*                    setFileSelected(img)*/}
-                    {/*                    setShow(true)*/}
-                    {/*                }} className="rounded-2xl h-48 w-auto mr-2 mb-2 cursor-pointer inline-block"*/}
-                    {/*                                src={img.path} alt={""}/>*/}
-                    {/*                }*/}
-                    {/*            </div>*/}
-                    {/*        )*/}
-                    {/*    })*/}
-                    {/*}*/}
+                    {
+                        file && file.map(function (tab, j) {
+                            return (
+                                <div key={j}>
+                                    <p className="text-2xl font-bold pt-4">{tab.created}</p>
+                                    <div className="h-1 w-full border-b my-5 w-1/2"/>
+                                    {tab.file.map((img,i) =>
+                                        <>
+                                            {img.path.startsWith("data:video") ? <video controls width="500">
+                                                    <source key={i}
+                                                            className="rounded-2xl h-48 w-auto mr-2 mb-2 cursor-pointer"
+                                                            src={img.path} type={"video/mp4"}/>
+                                                </video> :
+                                                <img key={i} onClick={() => {
+                                                    setFileSelected(img)
+                                                    setShow(true)
+                                                }}
+                                                     className="rounded-2xl h-48 w-auto mr-2 mb-2 cursor-pointer inline-block"
+                                                     src={img.path} alt={""}/>
+                                            }
+                                        </>
+                                    )}
+                                </div>
+                            )
+                        })
+                    }
                 </div>
             </div>
             <ModalDrive show={show} setShow={setShow} img={fileSelected}/>
