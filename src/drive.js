@@ -11,6 +11,13 @@ const ModalDrive = props => {
         return null
     }
 
+    function downloadFile(e) {
+        const a = document.createElement("a");
+        a.href = e.path;
+        a.download = e.name;
+        a.click();
+    }
+
     return (
         <div className="fixed top-0 left-0 overflow-hidden z-50 bg-gray-900/75 h-full w-full">
             <div className="absolute text-white top-5 right-5 cursor-pointer" onClick={() => props.setShow(false)}>
@@ -35,35 +42,48 @@ const ModalDrive = props => {
                             <p className="text-m font-light text-gray-600 my-3">
                                 Nom de l'image : {props.img.name}
                             </p>
-                            <a className="flex flex-wrap text-indigo-600 cursor-pointer mr-8">
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" viewBox="0 0 20 20"
-                                     fill="currentColor">
-                                    <path
-                                        d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z"/>
-                                </svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" viewBox="0 0 20 20"
+                            <a className="flex flex-wrap text-indigo-600 mr-8">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 cursor-pointer"
+                                     onClick={() => downloadFile(props.img)} viewBox="0 0 20 20"
                                      fill="currentColor">
                                     <path fillRule="evenodd"
                                           d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                          clipRule="evenodd"/>
+                                </svg>
+                                <svg viewBox="0 0 20 20" fill="currentColor" strokeWidth="2"
+                                     className="w-7 h-7 cursor-pointer" onClick={() => props.deleteFile(props.img.id)}>
+                                    <path fillRule="evenodd"
+                                          d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
                                           clipRule="evenodd"/>
                                 </svg>
                             </a>
                         </div>
                     </div>
                 </div>
+                {/*<ModalEdit img={props.img}/>*/}
             </div>
         </div>);
 }
+// const ModalEdit = props => {
+//
+//     return (<div className="w-full lg:w-1/3">
+//             <div className="lg:w-5/6 lg:pl-4 lg:mt-0 w-full mt-6" id="scroll">
+//                 <div className="bg-white border p-5 rounded shadow-xl mb-8">
+//                     <h2 className="text-2xl font-medium text-gray-800">Edit</h2>
+//                     <input type={"date"} className="text-m font-light text-gray-600 my-3" value={new Date(props.img.created).toISOString()}/>
+//                     <input type={"text"} value={props.img.name} className="text-m font-light text-gray-600 my-3"/>
+//                 </div>
+//             </div>
+//         </div>
+//     )
+// }
 
 function Drive() {
     if (localStorage.getItem("token") == null) {
         window.location.href = "http://localhost:3000/login";
     }
 
-
     const [show, setShow] = useState(false)
-    const [dateValue, setDateValue] = useState(false)
-    const [dateValueDiff, setDateValueDiff] = useState(moment())
     const [file, setFile] = useState([])
     const [fileSelected, setFileSelected] = useState("")
 
@@ -85,19 +105,32 @@ function Drive() {
         const response = await res.json()
         const fileResponse = response['hydra:member']
         let arrayFile = []
-        let dateCOmpare = moment(fileResponse[0].created).format('L')
-        arrayFile.push({"created": dateCOmpare, file: [fileResponse[0]]})
+        let dateCOmpare = moment(fileResponse[0].created).format('MM/DD/YYYY')
+        arrayFile.push({"created": moment(dateCOmpare).format('DD/MM/YYYY'), file: [fileResponse[0]]})
         for (let i = 1; i < fileResponse.length; i++) {
             if (moment(dateCOmpare).isSame(moment(fileResponse[i].created))) {
                 arrayFile[arrayFile.length - 1]['file'].push(fileResponse[i])
             } else {
-                dateCOmpare = moment(fileResponse[i].created).format('L')
-                arrayFile.push({"created": dateCOmpare, file: [fileResponse[i]]})
+                dateCOmpare = moment(fileResponse[i].created).format('MM/DD/YYYY')
+                arrayFile.push({"created": moment(dateCOmpare).format('DD/MM/YYYY'), file: [fileResponse[i]]})
             }
         }
         console.log("finish", arrayFile)
         setFile(arrayFile)
+    }
 
+    async function deleteFile(img) {
+        const token = JSON.parse(localStorage.getItem("token"))
+        let res = await fetch(`http://127.0.0.1:8000/api/files/${img}`, {
+            method: "DELETE",
+            headers: {
+                'Authorization': `bearer ${token}`
+            },
+            referrerPolicy: "origin-when-cross-origin"
+        });
+        setShow(false)
+        await loadFile()
+        return undefined;
     }
 
     function getBase64(file) {
@@ -205,9 +238,9 @@ function Drive() {
                                 <div key={j}>
                                     <p className="text-2xl font-bold pt-4">{tab.created}</p>
                                     <div className="h-1 w-full border-b my-5 w-1/2"/>
-                                    {tab.file.map((img,i) =>
+                                    {tab.file.map((img, i) =>
                                         <>
-                                            {img.path.startsWith("data:video") ? <video controls width="500">
+                                            {img.path.startsWith("data:video") ? <video controls width="400">
                                                     <source key={i}
                                                             className="rounded-2xl h-48 w-auto mr-2 mb-2 cursor-pointer"
                                                             src={img.path} type={"video/mp4"}/>
@@ -227,7 +260,7 @@ function Drive() {
                     }
                 </div>
             </div>
-            <ModalDrive show={show} setShow={setShow} img={fileSelected}/>
+            <ModalDrive show={show} setShow={setShow} img={fileSelected} deleteFile={deleteFile}/>
         </div>
     );
 }
